@@ -1,4 +1,4 @@
-module make_table_struct
+module github.com/theSmallwhiteMe/make_table_struct
 
 go 1.14
 

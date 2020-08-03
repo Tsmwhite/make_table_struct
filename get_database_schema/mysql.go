@@ -5,7 +5,7 @@ import (
 )
 
 type Mysql struct {
-	_make_
+	Make
 }
 
 func NewMysql() *Mysql {
@@ -13,28 +13,28 @@ func NewMysql() *Mysql {
 }
 
 
-func (this *Mysql) GetAllTable(dbName string) {
-	sql_str := "SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` =?"
-	rows, err := this.DbConn.Query(sql_str,dbName)
-	if err != nil {
-		panic("GetAllTable Query error:"+err.Error())
-	}
-
-	for rows.Next() {
-		var table string
-		err := rows.Scan(&table)
-		if err != nil {
-			panic("GetAllTable Scan error:"+err.Error())
-		}
-		this.tableList = append(this.tableList,table)
-	}
-}
+//func (this *Mysql) getAllTable(dbName string) {
+//	sql_str := "SELECT `TABLE_NAME` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` =?"
+//	rows, err := this.DbConn.Query(sql_str,dbName)
+//	if err != nil {
+//		panic("GetAllTable Query error:"+err.Error())
+//	}
+//
+//	for rows.Next() {
+//		var table string
+//		err := rows.Scan(&table)
+//		if err != nil {
+//			panic("GetAllTable Scan error:"+err.Error())
+//		}
+//		this.tableList = append(this.tableList,table)
+//	}
+//}
 
 func (this *Mysql) getTableColumns() {
 	sql_str := "SELECT `COLUMN_NAME`,`DATA_TYPE`,`TABLE_NAME` FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` = ? ORDER BY `TABLE_NAME` ASC,`ORDINAL_POSITION` ASC"
 	rows, err := this.DbConn.Query(sql_str,this.DbName)
 	if err != nil {
-		panic("GetAllTable Query error:"+err.Error())
+		panic("getTableColumns Query error:"+err.Error())
 	}
 
 	var tableColumns  = make(map[string][]column)

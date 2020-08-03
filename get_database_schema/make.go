@@ -33,7 +33,7 @@ type Maker interface {
 	makeStructContent()
 }
 
-type _make_ struct {
+type Make struct {
 	DBOption
 	connType		int
 	tableList		[]string
@@ -57,12 +57,12 @@ func Run(db *DBOption,instance Maker) {
 	instance.makeFile()
 }
 
-func (this *_make_) setDbOption(db *DBOption) {
+func (this *Make) setDbOption(db *DBOption) {
 	this.DbConn = db.DbConn
 	this.DbName = db.DbName
 }
 
-func (this _make_) makeFile() {
+func (this Make) makeFile() {
 	var file *os.File
 	var err  error
 
@@ -87,7 +87,7 @@ func (this _make_) makeFile() {
 	}
 }
 
-func (this *_make_) makeStructContent()  {
+func (this *Make) makeStructContent()  {
 	var type_str,structContent string
 	var param  []interface{}
 
@@ -110,7 +110,7 @@ func (this *_make_) makeStructContent()  {
 	this.fileContent = fmt.Sprintf(structContent,param...)
 }
 
-func (this _make_) getColumnType(data_type string) string {
+func (this Make) getColumnType(data_type string) string {
 	var res string
 	switch this.connType {
 		case _MySql_:
@@ -122,11 +122,11 @@ func (this _make_) getColumnType(data_type string) string {
 	return res
 }
 
-func (this *_make_) setTableSort(sort []string) {
+func (this *Make) setTableSort(sort []string) {
 	this.tableSort = sort
 }
 
-func (this *_make_) setTableColumns(tableColumns map[string][]column) {
+func (this *Make) setTableColumns(tableColumns map[string][]column) {
 	this.tableColumns = tableColumns
 }
 
