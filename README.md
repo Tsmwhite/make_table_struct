@@ -2,9 +2,6 @@
 go 连接数据库自动生成struct
 
 ```
-go get github.com/theSmallwhiteMe/make_table_struct
-
-新版本
 go get github.com/Tsmwhite/structMaker
 ```
 
